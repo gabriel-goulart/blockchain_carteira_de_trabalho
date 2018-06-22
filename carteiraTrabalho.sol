@@ -21,7 +21,7 @@ contract CarteiraTrabalho {
      * */
     function contratacao() public naoDonoDaCarteira(msg.sender) view returns(address contratoDeTrabalho){
         contratos[numContracts] = new ContratoTrabalho(proprietario,msg.sender );
-		numContracts++;
+        numContracts++;
         return contratos[numContracts-1];
         
     }
@@ -39,16 +39,16 @@ contract CarteiraTrabalho {
 // Contrato de trabalho entre empregado e empregador
 contract ContratoTrabalho {
     // atributos
-    address private empregado;
-    address private empregador;
+    address private empregado; // empregado associado ao contrato
+    address private empregador; // empregador associado ao contrato
     
-    uint  salario = 2 ether;
-    bytes32  funcao;
+    uint  salario = 2 ether; // salario do empregado
+    bytes32  funcao; // funcao do empregado
     mapping(uint => bytes32) ferias; // lista de ferias
-    uint numFerias;
+    uint numFerias; // quantidade de ferias
     mapping(uint => bytes32) observacao; // lista de observacoes
-    uint numObservacoes;
-    bool  contratoAtivo = true;
+    uint numObservacoes; // quantidade de observacoes
+    bool  contratoAtivo = true; // status do contrato de trabalho
     
     /**
      * Construtor do contrato
@@ -149,5 +149,13 @@ contract ContratoTrabalho {
     function registrarDemissao() public
     participaContrato(msg.sender){
         contratoAtivo = false;
+    }
+    
+    /**
+     * retorna o stauts do contrato
+     * */
+    function getStatus() public
+    participaContrato(msg.sender) view returns(bool ContratoAtivo){
+       return contratoAtivo;
     }
 }
