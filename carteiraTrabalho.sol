@@ -138,7 +138,7 @@ contract ContratoTrabalho {
      * retorna uma observacao
      * idobservacao a ser retornado
      * */
-    function registrarObservacao(uint idobservacao) public
+    function getObservacao(uint idobservacao) public
     participaContrato(msg.sender) view returns(bytes32 observacao){
        return observacao[idobservacao];
     }
